@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action 'self'; frame-src 'none'; img-src 'self' https://i.ibb.co https://deveciajans.com https://www.drhasanbilenonan.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Doç. Dr. Hasan Bilen Onan | Girişimsel Radyoloji Uzmanı</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,6 +180,10 @@
     .service-card:hover{transform:translateY(-6px);box-shadow:0 28px 62px rgba(16,36,63,.12)}
     .service-number{font-size:13px;font-weight:900;color:var(--cyan);margin-bottom:18px}
     .service-card a{display:inline-flex;margin-top:18px;color:var(--blue);font-size:13px;font-weight:900}
+    .service-grid:not(.is-expanded) .service-card:nth-of-type(n+11){display:none}
+    .treatments-toggle{display:inline-flex;width:100%;margin-top:18px;background:#ffffff;color:var(--navy);border-color:rgba(23,105,170,.22);box-shadow:0 14px 32px rgba(16,36,63,.08)}
+    .treatments-toggle .toggle-icon{font-size:18px;line-height:1;transition:.25s ease}
+    .treatments-toggle.is-expanded .toggle-icon{transform:rotate(180deg)}
 
     .split{display:grid;grid-template-columns:.92fr 1.08fr;gap:44px;align-items:center}
     .clinic-box{border-radius:36px;min-height:520px;background:
@@ -315,6 +321,8 @@
       .approach-grid,.service-grid,.process-grid,.blog-grid,.contact-grid,.footer-grid,.about-highlights{grid-template-columns:1fr}
       .approach-card,.service-card,.process-card{padding:22px;border-radius:20px;min-height:auto}
       .service-card:after{width:90px;height:90px;right:-44px;top:-44px}
+      .service-grid:not(.is-expanded) .service-card:nth-of-type(n+6){display:none}
+      .treatments-toggle{margin-top:16px}
       .about-doctor{padding:6px 0 54px}
       .about-wrap{border-radius:26px;padding:10px;gap:20px}
       .about-image{min-height:420px;border-radius:20px;background-position:center 30%}
@@ -526,13 +534,32 @@
           </div>
           <p class="section-desc">Damar hastalıklarından biyopsi işlemlerine, girişimsel onkolojiden ağrı yönetimine kadar birçok alanda modern tedavi seçenekleri sunulur.</p>
         </div>
-        <div class="service-grid">
-          <article class="service-card"><div class="service-number">01</div><h3>Vasküler Girişimler</h3><p>Varis tedavisi, damar darlıkları, balon ve stent uygulamaları.</p><a href="#">Detayları Gör →</a></article>
-          <article class="service-card"><div class="service-number">02</div><h3>Non-Vasküler İşlemler</h3><p>Safra yolları, idrar yolları, apse ve kist drenaj işlemleri.</p><a href="#">Detayları Gör →</a></article>
-          <article class="service-card"><div class="service-number">03</div><h3>Görüntüleme Eşliğinde Biyopsi</h3><p>Tiroid, meme, karaciğer ve akciğer gibi organlarda doku örnekleme.</p><a href="#">Detayları Gör →</a></article>
-          <article class="service-card"><div class="service-number">04</div><h3>Girişimsel Onkoloji</h3><p>Tümör ablasyonu ve damar yoluyla hedefe yönelik tedavi yaklaşımları.</p><a href="#">Detayları Gör →</a></article>
-          <article class="service-card"><div class="service-number">05</div><h3>Ağrı Yönetimi</h3><p>Bel fıtığı, eklem ağrısı ve kronik ağrılarda görüntüleme kılavuzlu enjeksiyonlar.</p><a href="#">Detayları Gör →</a></article>
+        <div class="service-grid" id="treatmentGrid">
+          <article class="service-card"><div class="service-number">01</div><h3>Varis Tedavisi</h3><p>Lazer, radyofrekans, skleroterapi ve yapıştırıcı yöntemlerle damar içi tedavi seçenekleri.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">02</div><h3>Damar Darlığı ve Tıkanıklıkları</h3><p>Balon anjiyoplasti, stent ve pıhtı açma işlemleriyle damar akımının değerlendirilmesi.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">03</div><h3>Diyaliz Fistül Girişimleri</h3><p>Fistül darlıkları, kateter işlemleri ve damar yolu problemlerinde görüntüleme kılavuzlu yaklaşım.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">04</div><h3>Embolizasyon İşlemleri</h3><p>Kanama, anevrizma ve damar kaynaklı sorunlarda hedef damarın kontrollü kapatılması.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">05</div><h3>Miyom Embolizasyonu</h3><p>Rahim miyomlarında cerrahi dışı, damar yoluyla uygulanan minimal invaziv tedavi planlaması.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">06</div><h3>Prostat Embolizasyonu</h3><p>İyi huylu prostat büyümesinde uygun hastalar için damar içinden tedavi seçeneği.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">07</div><h3>Varikosel Embolizasyonu</h3><p>Varikosel tedavisinde kasıktan veya koldan damar içi kapatma işlemi.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">08</div><h3>Görüntüleme Eşliğinde Biyopsi</h3><p>Tiroid, meme, karaciğer, akciğer, böbrek ve yumuşak doku lezyonlarında doku örnekleme.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">09</div><h3>Tiroid Nodül Ablasyonu</h3><p>Uygun tiroid nodüllerinde radyofrekans veya mikrodalga ablasyonla hacim azaltma yaklaşımı.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">10</div><h3>Tümör Ablasyonları</h3><p>Karaciğer, böbrek, akciğer ve kemik lezyonlarında iğne ile ısı temelli hedef tedaviler.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">11</div><h3>TAKE ve TARE</h3><p>Karaciğer tümörlerinde damar yoluyla kemoterapi veya radyoembolizasyon uygulamaları.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">12</div><h3>Safra Yolu Girişimleri</h3><p>Safra yolu tıkanıklıklarında drenaj, stent ve kateter işlemleri.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">13</div><h3>Üriner Sistem Girişimleri</h3><p>Nefrostomi, üreteral stent ve idrar yolu tıkanıklıklarında görüntüleme eşliğinde tedavi.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">14</div><h3>Apse ve Kist Drenajı</h3><p>Vücut içi sıvı koleksiyonlarında ultrason veya BT rehberliğinde drenaj işlemleri.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">15</div><h3>Ağrı Blokajları</h3><p>Bel, boyun, eklem ve sinir kaynaklı ağrılarda hedefe yönelik enjeksiyon uygulamaları.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">16</div><h3>Bel Fıtığı İşlemleri</h3><p>Uygun hastalarda epidural enjeksiyon, sinir blokajı ve disk kaynaklı ağrı girişimleri.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">17</div><h3>Vertebroplasti ve Kifoplasti</h3><p>Omurga çökme kırıklarında görüntüleme kılavuzlu kemik güçlendirme işlemleri.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">18</div><h3>Port Kateter ve PICC</h3><p>Kemoterapi, uzun süreli ilaç tedavisi veya damar erişimi için kateter yerleştirme işlemleri.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">19</div><h3>Lenfatik Girişimler</h3><p>Lenf kaçağı ve ilişkili sıvı birikimlerinde tanısal ve tedaviye yönelik girişimsel uygulamalar.</p><a href="#randevu">Randevu Al</a></article>
+          <article class="service-card"><div class="service-number">20</div><h3>Pediatrik Girişimsel İşlemler</h3><p>Çocuk hastalarda uygun endikasyonlarda görüntüleme rehberli minimal invaziv işlemler.</p><a href="#randevu">Randevu Al</a></article>
         </div>
+        <button class="btn treatments-toggle" type="button" aria-expanded="false" aria-controls="treatmentGrid">
+          <span>Tüm tedavileri göster</span>
+          <span class="toggle-icon" aria-hidden="true">⌄</span>
+        </button>
       </div>
     </section>
 
@@ -578,7 +605,7 @@
             <div class="section-kicker" style="color:#69d7ec">Randevu ve iletişim</div>
             <h2>Sizi arayalım, uygun değerlendirme sürecini birlikte planlayalım.</h2>
             <p>Online randevu işlemlerinizi DoktorTakvimi üzerinden hızlıca oluşturabilir, klinikle doğrudan iletişime geçebilirsiniz.</p>
-            <a class="btn btn-primary" href="https://www.doktortakvimi.com/hasan-bilen-onan/radyoloji/adana?utm_campaign=&utm_content=&utm_id=40125&utm_medium=big_with_calendar&utm_source=widget-doctor-40125" target="_blank" rel="noopener">DoktorTakvimi Üzerinden Randevu Al</a>
+            <a class="btn btn-primary" href="https://www.doktortakvimi.com/hasan-bilen-onan/radyoloji/adana?utm_campaign=&utm_content=&utm_id=40125&utm_medium=big_with_calendar&utm_source=widget-doctor-40125" target="_blank" rel="noopener noreferrer">DoktorTakvimi Üzerinden Randevu Al</a>
             <div class="contact-grid">
               <div class="contact-item"><small>E-posta</small><strong>info@drhasanbilenonan.com</strong></div>
               <div class="contact-item"><small>Lokasyon</small><strong>Adana Central Plaza</strong></div>
@@ -602,7 +629,7 @@
               <div class="dt-detail"><span class="dt-detail-icon">☎</span><span>Telefonla destek: 0850 333 0388</span></div>
             </div>
             <div class="dt-cta">
-              <a class="btn btn-primary" href="https://www.doktortakvimi.com/hasan-bilen-onan/radyoloji/adana?utm_campaign=&utm_content=&utm_id=40125&utm_medium=big_with_calendar&utm_source=widget-doctor-40125" target="_blank" rel="noopener">Randevu Al</a>
+              <a class="btn btn-primary" href="https://www.doktortakvimi.com/hasan-bilen-onan/radyoloji/adana?utm_campaign=&utm_content=&utm_id=40125&utm_medium=big_with_calendar&utm_source=widget-doctor-40125" target="_blank" rel="noopener noreferrer">Randevu Al</a>
               <a class="btn btn-ghost" href="tel:05335537601">Kliniği Ara</a>
               <p class="dt-note">Randevu işlemleri DoktorTakvimi platformu üzerinden güvenli şekilde tamamlanır.</p>
             </div>
@@ -648,10 +675,20 @@
     </footer>
   </main>
   <script>
+    'use strict';
+
     const hamburgerBtn = document.querySelector('.hamburger-btn');
     const mobileMenu = document.querySelector('#mobileMenu');
+    const treatmentsToggle = document.querySelector('.treatments-toggle');
+    const treatmentGrid = document.querySelector('#treatmentGrid');
 
     if (hamburgerBtn && mobileMenu) {
+      const closeMobileMenu = () => {
+        mobileMenu.classList.remove('is-open');
+        hamburgerBtn.classList.remove('is-active');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      };
+
       hamburgerBtn.addEventListener('click', () => {
         const isOpen = mobileMenu.classList.toggle('is-open');
         hamburgerBtn.classList.toggle('is-active', isOpen);
@@ -659,19 +696,22 @@
       });
 
       mobileMenu.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          mobileMenu.classList.remove('is-open');
-          hamburgerBtn.classList.remove('is-active');
-          hamburgerBtn.setAttribute('aria-expanded', 'false');
-        });
+        link.addEventListener('click', closeMobileMenu);
       });
 
       document.addEventListener('click', (event) => {
-        if (!event.target.closest('.navbar')) {
-          mobileMenu.classList.remove('is-open');
-          hamburgerBtn.classList.remove('is-active');
-          hamburgerBtn.setAttribute('aria-expanded', 'false');
+        if (event.target instanceof Element && !event.target.closest('.navbar')) {
+          closeMobileMenu();
         }
+      });
+    }
+
+    if (treatmentsToggle && treatmentGrid) {
+      treatmentsToggle.addEventListener('click', () => {
+        const isExpanded = treatmentGrid.classList.toggle('is-expanded');
+        treatmentsToggle.classList.toggle('is-expanded', isExpanded);
+        treatmentsToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        treatmentsToggle.querySelector('span').textContent = isExpanded ? 'Daha az göster' : 'Tüm tedavileri göster';
       });
     }
   </script>
